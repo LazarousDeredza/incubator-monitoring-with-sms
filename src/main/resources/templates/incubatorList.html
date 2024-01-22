@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="assets/logo/sysIco(2).ico"/>
+    <title>Incubators</title>
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="css/simplebar.css"/>
+    <!-- Fonts CSS -->
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="css/feather.css"/>
+    <link rel="stylesheet" href="css/all.css"/>
+    <link rel="stylesheet" href="css/customlease.css"/>
+    <link rel="stylesheet" href="css/dataTables.bootstrap4.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="css/daterangepicker.css"/>
+    <!-- App CSS -->
+
+</head>
+<body class="vertical  light  " id="body" onload="getIncubators()">
+<div class="wrapper">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Incubator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/home}">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/list}">List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/add}">Add</a>
+                    </li>
+
+
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main" class="main-content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2 class="mb-2 page-title">Incubators</h2>
+                    <p class="card-text">All Incubators Registered</p>
+                    <div class="row my-4">
+                        <!-- Small table -->
+                        <div class="col-md-12">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <!-- table -->
+                                    <!-- <table class="table dataTables table-hover  table-borderless border-v" id="dataTable" style="width: 100%!important;">-->
+                                    <table class="table table-hover  dataTables table-borderless border-v"
+                                           id="dataTable" style="width:100%!important;">
+                                        <thead class="thead-dark">
+                                        <tr role="row">
+                                            <th>ID</th>
+                                            <th>Owner</th>
+                                            <th>Location</th>
+                                            <th><span class="fe fe-phone"></span>Phone</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <!--  <tbody id="t_body"></tbody>-->
+                                    </table>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                         data-bs-backdrop="static"
+                                         data-bs-keyboard="false">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel5">Choose Option</h5>
+                                                    <a href="">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </a>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="alert alert-info" role="alert" id="alerrt5" style="display: none">
+                                                        <div id="liveAlertPlaceholder">
+                                                            <button id="ldiD5"
+                                                                    style="display:none;background: none;color: green;border: none;font-size: 20px"
+                                                                    class="btn btn-secondary" type="button"
+                                                                    disabled="true">
+                                                                Sending ...
+                                                                <span class="spinner-border spinner-border-sm"
+                                                                      role="status" aria-hidden="true"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center">
+
+
+                                                    <a th:href="@{/list}">
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-bs-dismiss="modal" id="Close5"
+                                                                style="display: none">OK
+                                                        </button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-success"
+                                                            onclick="turn('on')" id="turnon">
+                                                        Turn On
+                                                    </button>
+                                                    <button type="button" id="turnoff" class="btn btn-danger"
+                                                            onclick="turn('off')">Turn Off
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="renewal" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                         data-bs-backdrop="static"
+                                         data-bs-keyboard="false">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Lease Renewal
+                                                        Dialog</h5>
+                                                    <a href="">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </a>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <div class="alert alert-info" role="alert" id="alerrt">
+                                                        <div id="liveAlertPlaceholder2">
+                                                            <button id="ldID"
+                                                                    style="display:none;background: none;color: green;border: none;font-size: 20px"
+                                                                    class="btn btn-secondary" type="button"
+                                                                    disabled="true">
+                                                                Renewing ...
+                                                                <span class="spinner-border spinner-border-sm"
+                                                                      role="status" aria-hidden="true"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div id="renewalInfo">
+                                                            <div class="form-group col-md-12">
+                                                                <label for="id2">ID = </label>
+                                                                <label id="id2"></label>
+                                                                <div class="valid-feedback"></div>
+
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label for="TenantName2">Business :</label>
+                                                                <input type="text" class="form-control" id="TenantName2"
+                                                                       disabled="true"/>
+                                                                <div class="valid-feedback"></div>
+
+                                                            </div>
+                                                            <div class="form-group col-md-12 mb-3">
+                                                                <label for="startDate2">Start Date</label>
+                                                                <input class="form-control" id="startDate2" type="date"
+                                                                       name="startDate"
+                                                                /> >
+                                                            </div>
+                                                            <div class="form-group col-md-12 mb-3">
+                                                                <label for="duration2">Duration :</label>
+                                                                <input class="form-control" id="duration2" type="number"
+                                                                       name="duration"
+                                                                /> >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center">
+
+                                                    <a th:href="@{/View-Lease}">
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-bs-dismiss="modal" id="Close2"
+                                                                style="display: none">OK
+                                                        </button>
+                                                    </a>
+
+                                                    <button type="button" class="btn btn-danger"
+                                                            data-bs-dismiss="modal"
+                                                            style="padding-left: 10px;padding-right: 10px" id="hhh">
+                                                        Cancel
+                                                    </button>
+
+
+                                                    <button id="liveAlertBtn2" class="btn btn-primary"
+                                                            onclick="renewlease()">
+                                                        Submit Renewal
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="deleteDialog" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                         data-bs-backdrop="static"
+                                         data-bs-keyboard="false">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want
+                                                        to Delete this Record ?</h5>
+                                                    <a href="">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </a>
+                                                </div>
+                                                <div class="modal-body" id="modal-body" style="display: none">
+                                                    <div class="alert alert-info" role="alert" id="alerrt">
+
+                                                        <div id="liveAlertPlaceholder4">
+                                                            <button id="ldID"
+                                                                    style="background: none;color: green;border: none;font-size: 20px"
+                                                                    class="btn btn-secondary" type="button"
+                                                                    disabled="true">
+                                                                Deleting...
+                                                                <span class="spinner-border spinner-border-sm"
+                                                                      role="status"
+                                                                      aria-hidden="true"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center">
+
+
+                                                    <button type="button" class="btn btn-secondary"
+                                                            onclick="DeleteIncubator()" id="yes">
+                                                        Yes
+                                                    </button>
+
+                                                    <a href="" id="cancel" onclick="closeModal()">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal" id="cancel">
+                                                            Cancel
+                                                        </button>
+                                                    </a>
+
+
+                                                    <a th:href="@{/list}">
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-bs-dismiss="modal" id="Close4"
+                                                                style="display:none">Ok
+                                                        </button>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> <!-- simple table -->
+                    </div> <!-- end section -->
+                </div> <!-- .col-12 -->
+            </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+        <div class="modal fade modal-notif modal-slide" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="defaultModalLabel">Notifications</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group list-group-flush my-n3">
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-box fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Package has uploaded successfull</strong></small>
+                                        <div class="my-0 text-muted small">Package is zipped and uploaded</div>
+                                        <small class="badge badge-pill badge-light text-muted">1m ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-download fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Widgets are updated successfull</strong></small>
+                                        <div class="my-0 text-muted small">Just create new layout Index, form, table
+                                        </div>
+                                        <small class="badge badge-pill badge-light text-muted">2m ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-inbox fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Notifications have been sent</strong></small>
+                                        <div class="my-0 text-muted small">Fusce dapibus, tellus ac cursus commodo</div>
+                                        <small class="badge badge-pill badge-light text-muted">30m ago</small>
+                                    </div>
+                                </div> <!-- / .row -->
+                            </div>
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-link fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Link was attached to menu</strong></small>
+                                        <div class="my-0 text-muted small">New layout has been attached to the menu
+                                        </div>
+                                        <small class="badge badge-pill badge-light text-muted">1h ago</small>
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div> <!-- / .list-group -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-shortcut modal-slide" tabindex="-1" role="dialog"
+             aria-labelledby="defaultModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="defaultModalLabel">Shortcuts</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-5">
+                        <div class="row align-items-center">
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-success justify-content-center">
+                                    <i class="fe fe-cpu fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Control area</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-activity fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Activity</p>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-droplet fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Droplet</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-upload-cloud fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Upload</p>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-users fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Users</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-settings fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> <!-- main -->
+</div> <!-- .wrapper -->
+
+
+<script src="js/index.js"></script>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/simplebar.min.js"></script>
+<script src='js/daterangepicker.js'></script>
+<script src='js/jquery.stickOnScroll.js'></script>
+<script src="js/tinycolor-min.js"></script>
+<script src="js/config.js"></script>
+<script src='js/jquery.dataTables.min.js'></script>
+<script src='js/dataTables.bootstrap4.min.js'></script>
+
+<script src="js/apps.js"></script>
+<script src='js/bootstrap.bundle.min.js'></script>
+<script src="js/select2.min.js"></script>
+
+<script>
+    $('#dataTable-1').DataTable(
+        {
+            autoWidth: true,
+            "lengthMenu": [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ]
+        });
+</script>
+
+
+<script src='js/jquery.validate.min.js'></script>
+
+
+</body>
+</html>

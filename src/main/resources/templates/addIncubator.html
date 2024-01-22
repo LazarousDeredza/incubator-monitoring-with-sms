@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>add Incubator</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+<body style="background-image: url('img/background.png')">
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Incubator</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Map</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/list}">List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/add}">Add</a>
+                </li>
+
+
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="col-lg-6 offset-lg-3 "  style="background-color: dimgray;padding: 20px;margin-top: 5rem;border-radius: 10%;">
+    <center>
+        <h3>Enter Incubator Details</h3>
+    </center>
+    <hr/>
+
+    <div class="rr row justify-content-center">
+        <div class="col">
+            <h6>Owner</h6>
+        </div>
+    </div>
+    <div class="rr row justify-content-center">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name" id="fname" required="true" name="firstName"/>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" id="lname" required="true" name="lastName"/>
+        </div>
+    </div>
+    <div class="rr row justify-content-center">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Location" id="location" required="true" name="location"/>
+        </div>
+    </div>
+    <div class="rr row justify-content-center">
+        <div class="col">
+            <h6>GSM Phone Number</h6>
+        </div>
+    </div>
+    <div class="rr row justify-content-center">
+        <div class="col">
+            <input type="phone" class="form-control" placeholder="+263 xxx xxx xxx" id="phone" required="true" name="phone"/>
+        </div>
+    </div>
+    <div class="rr row justify-content-center">
+        <div class="col">
+            <h6>GPS Coordinates</h6>
+        </div>
+    </div>
+    <div class="rr row justify-content-center">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Latitude" id="latitude" required="true" name="latitude"/>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Longitude" id="longitude" required="true" name="longitude"/>
+        </div>
+
+    </div>
+    <div class="row rr justify-content-center">
+        <button type="button" class="btn btn-primary" onclick="saveIncubator();" style="width: auto!important;">Submit</button>
+    </div>
+</div>
+
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Operation Response</h5>
+
+            </div>
+            <div class="modal-body">
+                <h4 id="response"></h4>
+
+            </div>
+            <div class="modal-footer">
+             <a th:href="@{/home}">   <button type="button" class="btn btn-primary"  >
+                    <span aria-hidden="true" >OK</span>
+                </button>
+             </a>
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
+                <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script  src="js/index.js"></script>
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/simplebar.min.js"></script>
+<script src='js/daterangepicker.js'></script>
+<script src='js/jquery.stickOnScroll.js'></script>
+<script src="js/tinycolor-min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/apps.js"></script>
+<script src='js/select2.min.js'></script>
+<script src='js/jquery.steps.min.js'></script>
+<script src='js/jquery.validate.min.js'></script>
+<script src='js/jquery.timepicker.js'></script>
+
+</body>
+</html>

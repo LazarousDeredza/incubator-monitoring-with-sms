@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="assets/logo/sysIco(2).ico"/>
+    <title>Incubator Details</title>
+    <!-- Simple bar CSS -->
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/dataTables.bootstrap4.css"/>
+
+
+
+    <!-- App CSS -->
+
+</head>
+<body class="vertical  light  " onload="FetchRecordForAllDetails()">
+<div class="wrapper">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Incubator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/home}">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/list}">List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/add}">Add</a>
+                    </li>
+
+
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main" class="main-content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2 class="page-title">Incubator Detail</h2>
+                    <p class="text-muted">...</p>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="card shadow mb-4">
+
+                                <div class="card-body">
+
+                                    <div class="d-flex justify-content-center rounded-pill"
+                                         style="background-color: lightgrey; ">
+                                        <h4 class="mb-2" style="padding: 10px"><strong> ID = <span
+                                                id="id"></span></strong></h4>
+                                    </div>
+
+                                    <div style="padding-left: 50px;padding-top: 20px">
+
+
+                                        <p class="mb-2"><strong> </strong></p>
+                                        <div class="form-row"><h5>Owner</h5></div>
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label for="firstName">First Name :</label>
+                                                <input type="text" class="form-control" id="firstName"/>
+                                            </div> <!-- form-group -->
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4 form-group mb-3">
+                                                <label for="lastName">Last Name:</label>
+                                                <input type="text" class="form-control" id="lastName"/>
+
+                                            </div>
+                                            <!-- form-group -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label for="location">Location:</label>
+                                                <input type="text" class="form-control" id="location"/>
+                                                <div class="valid-feedback"></div>
+
+                                            </div> <!-- form-group -->
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4 form-group mb-3">
+                                                <label for="phone">Phone:</label>
+                                                <input type="text" class="form-control" id="phone"/>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <!-- form-group -->
+                                        </div> <!-- form-row -->
+
+                                        <div class="row">
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="latitude">Latitude:</label>
+                                                <input type="text" class="form-control" id="latitude"/>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="longitude">Longitude :</label>
+                                                <input class="form-control" id="longitude" name="number"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label for="temperature">Temperature:</label>
+                                                <input type="text" class="form-control" id="temperature"/>
+                                                <div class="valid-feedback"></div>
+
+                                            </div> <!-- form-group -->
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4 form-group mb-3">
+                                                <label for="humidity">Humidity:</label>
+                                                <input type="text" class="form-control" id="humidity"/>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <!-- form-group -->
+                                        </div> <!-- form-row -->
+                                        <div class="form-row"><h5>Battery</h5></div>
+                                        <div class="row">
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="voltage">Voltage:</label>
+                                                <input type="text" class="form-control" id="voltage"/>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="current">Current :</label>
+                                                <input class="form-control" id="current"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="state">State:</label>
+                                                <input type="text" class="form-control" id="state"/>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="form-group col-md-4 mb-3">
+                                                <label for="dateAdded">Date Added :</label>
+                                                <input class="form-control" id="dateAdded"/>
+                                            </div>
+
+                                        </div>
+
+
+                                        <br/>
+
+
+                                    </div>
+                                </div>
+                            </div> <!-- /.card -->
+
+
+                        </div> <!-- /.col -->
+
+
+                    </div> <!-- end section -->
+
+                </div>
+            </div>
+
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+
+                    <div class="d-flex justify-content-center rounded-pill"
+                         style="background-color: lightgrey; ">
+                        <h4 class="mb-2" style="padding: 10px"><strong> History</strong></h4>
+                    </div>
+                    <div style="padding: 20px!important;">
+                        <table class="table table-hover  dataTables table-borderless border-v row-border stripe"
+                               id="dataTable" style="width:100%!important;">
+                            <thead class="thead-dark">
+                            <tr role="row">
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Temperature</th>
+                                <th>Humidity</th>
+                                <th>Battery C</th>
+                                <th>Battery V</th>
+
+
+                            </tr>
+                            </thead>
+                            <!--  <tbody id="t_body"></tbody>-->
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div> <!-- .row -->
+        <!-- .container-fluid -->
+
+
+        <div class="modal fade modal-notif modal-slide" tabindex="-1" role="dialog"
+             aria-labelledby="defaultModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="defaultModalLabel">Notifications</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group list-group-flush my-n3">
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-box fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Package has uploaded successfull</strong></small>
+                                        <div class="my-0 text-muted small">Package is zipped and uploaded</div>
+                                        <small class="badge badge-pill badge-light text-muted">1m ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-download fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Widgets are updated successfull</strong></small>
+                                        <div class="my-0 text-muted small">Just create new layout Index, form,
+                                            table
+                                        </div>
+                                        <small class="badge badge-pill badge-light text-muted">2m ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-inbox fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Notifications have been sent</strong></small>
+                                        <div class="my-0 text-muted small">Fusce dapibus, tellus ac cursus commodo
+                                        </div>
+                                        <small class="badge badge-pill badge-light text-muted">30m ago</small>
+                                    </div>
+                                </div> <!-- / .row -->
+                            </div>
+                            <div class="list-group-item bg-transparent">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="fe fe-link fe-24"></span>
+                                    </div>
+                                    <div class="col">
+                                        <small><strong>Link was attached to menu</strong></small>
+                                        <div class="my-0 text-muted small">New layout has been attached to the
+                                            menu
+                                        </div>
+                                        <small class="badge badge-pill badge-light text-muted">1h ago</small>
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div> <!-- / .list-group -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-shortcut modal-slide" tabindex="-1" role="dialog"
+             aria-labelledby="defaultModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="defaultModalLabel">Shortcuts</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-5">
+                        <div class="row align-items-center">
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-success justify-content-center">
+                                    <i class="fe fe-cpu fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Control area</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-activity fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Activity</p>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-droplet fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Droplet</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-upload-cloud fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Upload</p>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-users fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Users</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <div class="squircle bg-primary justify-content-center">
+                                    <i class="fe fe-settings fe-32 align-self-center text-white"></i>
+                                </div>
+                                <p>Settings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> <!-- main -->
+</div> <!-- .wrapper -->
+
+
+<script src="js/index.js"></script>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src='js/jquery.dataTables.min.js'></script>
+<script src='js/dataTables.bootstrap4.min.js'></script>
+<script src="js/simplebar.min.js"></script>
+<script src='js/daterangepicker.js'></script>
+<script src='js/jquery.stickOnScroll.js'></script>
+<script src="js/tinycolor-min.js"></script>
+<script src="js/config.js"></script>
+<script src='js/jquery.mask.min.js'></script>
+<script src='js/select2.min.js'></script>
+<script src='js/jquery.steps.min.js'></script>
+<script src='js/jquery.validate.min.js'></script>
+<script src='js/jquery.timepicker.js'></script>
+<script src='js/dropzone.min.js'></script>
+<script src='js/uppy.min.js'></script>
+<script src='js/quill.min.js'></script>
+<script src='js/apps.js'></script>
+<script>
+    $('.select2').select2(
+        {
+            theme: 'bootstrap4',
+        });
+    $('.select2-multi').select2(
+        {
+            multiple: true,
+            theme: 'bootstrap4',
+        });
+    $('.drgpicker').daterangepicker(
+        {
+            singleDatePicker: true,
+            timePicker: false,
+            showDropdowns: true,
+            locale:
+                {
+                    format: 'MM/DD/YYYY'
+                }
+        });
+    $('.time-input').timepicker(
+        {
+            'scrollDefault': 'now',
+            'zindex': '9999' /* fix modal open */
+        });
+    /** date range picker */
+    if ($('.datetimes').length) {
+        $('.datetimes').daterangepicker(
+            {
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale:
+                    {
+                        format: 'M/DD hh:mm A'
+                    }
+            });
+    }
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker(
+        {
+            startDate: start,
+            endDate: end,
+            ranges:
+                {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+        }, cb);
+    cb(start, end);
+    $('.input-placeholder').mask("00/00/0000",
+        {
+            placeholder: "__/__/____"
+        });
+    $('.input-zip').mask('00000-000',
+        {
+            placeholder: "____-___"
+        });
+    $('.input-money').mask("#.##0,00",
+        {
+            reverse: true
+        });
+    $('.input-phoneus').mask('(000) 000-0000');
+    $('.input-mixed').mask('AAA 000-S0S');
+    $('.input-ip').mask('0ZZ.0ZZ.0ZZ.0ZZ',
+        {
+            translation:
+                {
+                    'Z':
+                        {
+                            pattern: /[0-9]/,
+                            optional: true
+                        }
+                },
+            placeholder: "___.___.___.___"
+        });
+    // editor
+    var editor = document.getElementById('editor');
+    if (editor) {
+        var toolbarOptions = [
+            [
+                {
+                    'font': []
+                }],
+            [
+                {
+                    'header': [1, 2, 3, 4, 5, 6, false]
+                }],
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [
+                {
+                    'header': 1
+                },
+                {
+                    'header': 2
+                }],
+            [
+                {
+                    'list': 'ordered'
+                },
+                {
+                    'list': 'bullet'
+                }],
+            [
+                {
+                    'script': 'sub'
+                },
+                {
+                    'script': 'super'
+                }],
+            [
+                {
+                    'indent': '-1'
+                },
+                {
+                    'indent': '+1'
+                }], // outdent/indent
+            [
+                {
+                    'direction': 'rtl'
+                }], // text direction
+            [
+                {
+                    'color': []
+                },
+                {
+                    'background': []
+                }], // dropdown with defaults from theme
+            [
+                {
+                    'align': []
+                }],
+            ['clean'] // remove formatting button
+        ];
+        var quill = new Quill(editor,
+            {
+                modules:
+                    {
+                        toolbar: toolbarOptions
+                    },
+                theme: 'snow'
+            });
+    }
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+
+</body>
+</html>

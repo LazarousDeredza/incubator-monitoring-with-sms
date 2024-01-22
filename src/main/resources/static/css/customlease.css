@@ -1,0 +1,45 @@
+.Customtopnav {
+    overflow: hidden;
+    /*background-color: #e9e9e9;*/
+
+}
+.Customtopnav input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: white;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/16px-Search_Icon.svg.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+
+
+    float: right;
+    border: .7px solid lightgrey;
+    margin-top: 8px;
+    margin-right: 20px;
+    margin-bottom: 8px;
+    font-size: 17px;
+    height:40px;
+}
+.entry{
+    margin-left: 0px;
+    float: left;
+    padding-top:15px;
+    padding-bottom: 15px;
+}
+.Customtopnav .row .cols .row .col{
+    padding-right:0px!important
+}
+.Customtopnav .row .cols .row  .colm{
+    padding-left:0px!important;
+}
+ .Customtopnav .row  .col-sm-6,.Customtopnav .row .col-md-8{
+    width: 50%!important;
+ }
+
+.Customtopnav input[type=text]:focus {
+    width: 180px;
+}
